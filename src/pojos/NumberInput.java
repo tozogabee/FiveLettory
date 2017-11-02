@@ -1,18 +1,16 @@
 package pojos;
 
-import exceptions.NoNumberException;
 import exceptions.NumberOutOfRangeException;
-import exceptions.SameNumberException;
 
 import java.util.*;
 
 public class NumberInput {
 	
-	 Set<Integer> numbers;
+	 List<Integer> numbers;
 	private static Scanner scanner=new Scanner(System.in);
 
 	public NumberInput(){
-		this.numbers=new HashSet<>();
+		this.numbers=new ArrayList<>();
 	}
 	
 
@@ -50,34 +48,35 @@ public class NumberInput {
 		for(int i=1;i<=5;++i)
 		{
 			do {
-				try {
-					if (i == 1)
-						num = this.readInt(msg + i+"st number: ");
-					else if (i == 2)
-						num = this.readInt(msg + i+"nd number: ");
-					else if (i == 3)
-						num = this.readInt(msg + i+"rd number: ");
-					else
-						num = this.readInt(msg + i+"th number: ");
+					if (i == 1) {
+						num = this.readInt(msg + i + "st number: ");
+					}
+					else if (i == 2) {
+						num = this.readInt(msg + i + "nd number: ");
+					}
+					else if (i == 3) {
+						num = this.readInt(msg + i + "rd number: ");
+					}
+					else {
+						num = this.readInt(msg + i + "th number: ");
+					}
+
 					if(isContained(num))
+					{
 						contained=true;
+					}
 					else
 					{
 						this.numbers.add(num);
 						contained=false;
 					}
-				}
-				catch (SameNumberException e)
-				{
-					System.out.println(e.getMessage());
-				}
+
 			}while(contained);
 
 		}
-		//return this.numbers;
 	}
 
-	public Set<Integer> getNumbers() {
+	public List<Integer> getNumbers() {
 		return numbers;
 	}
 
@@ -89,14 +88,15 @@ public class NumberInput {
 		}
 	}
 
-	private boolean isContained(int number) throws SameNumberException {
+	private boolean isContained(int number) {
 		if(this.getNumbers().contains(number))
 		{
+			System.out.println("This "+number+" is contained already\n");
 			return true;
 		}
 		else
 		{
-			throw new SameNumberException("The is number is repeated alrready - "+number);
+			return false;
 		}
 	}
 
@@ -105,7 +105,7 @@ public class NumberInput {
 		int i=1;
 		for(int actual : this.getNumbers())
 		{
-			System.out.println(i+" --> "+actual);
+			System.out.println((i++)+" --> "+actual);
 		}
 	}
 
@@ -114,5 +114,10 @@ public class NumberInput {
 	public void close()
 	{
 		this.scanner.close();
+	}
+
+	public void removeAllElements()
+	{
+		this.numbers.removeAll(this.numbers);
 	}
 }
