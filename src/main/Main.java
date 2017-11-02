@@ -36,7 +36,9 @@ public class Main {
     {
             boolean won=false;
             int howManyHits=0;
+            int howManyiteration=0;
             do {
+                ++howManyiteration;
                 addTheLotteryNumbers(numberInput);
                 lotteryAutomata.lotterying();
                 lotteryAutomata.listing();
@@ -45,10 +47,15 @@ public class Main {
                 if(hit==5)
                 {
                     System.out.println("direct hit");
+                    System.out.println("Iteration number is "+howManyiteration);
                     won=true;
                 }
                 else
                 {
+                    if(hit==0)
+                    {
+                        System.out.println("The person had got 0 hit");
+                    }
                     if(hit==1)
                     {
                         System.out.println("1 hit - "+howManyHits);
