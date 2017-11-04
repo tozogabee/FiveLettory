@@ -26,7 +26,6 @@ public class Main {
     public static void creatingLottery(LotteryAutomata lotteryAutomata,NumberInput numberInput)
     {
             boolean won=false;
-            int howManyHits=0;
             int howManyiteration=0;
             int oneHit = 0 ,twoHit = 0,threeHit = 0,fourHit =0;
             do {
