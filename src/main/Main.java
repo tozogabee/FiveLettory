@@ -12,16 +12,7 @@ public class Main {
     {
         NumberInput input=new NumberInput();
         LotteryAutomata lotteryAutomata=new LotteryAutomata();
-        //addTheLotteryNumbers(input);
         creatingLottery(lotteryAutomata,input);
-        //Set<Integer> lotteryNums=input.readNums();
-        //input.readNums();
-        //input.listingNumbers();
-        //addTheLotteryNumbers(input);
-        //input.listingNumbers();
-        //lotteryAutomata.lotterying();
-        //lotteryAutomata.listing();
-
     }
 
     public static void addTheLotteryNumbers(NumberInput input)
@@ -37,13 +28,14 @@ public class Main {
             boolean won=false;
             int howManyHits=0;
             int howManyiteration=0;
+            int oneHit = 0 ,twoHit = 0,threeHit = 0,fourHit =0;
             do {
                 ++howManyiteration;
                 addTheLotteryNumbers(numberInput);
                 lotteryAutomata.lotterying();
                 lotteryAutomata.listing();
                 int hit=getHit(lotteryAutomata,numberInput);
-                howManyHits=howManyHits(lotteryAutomata,numberInput);
+                //howManyHits=howManyHits(oneHit,twoHit,threeHit,fourHit,lotteryAutomata,numberInput);
                 if(hit==5)
                 {
                     System.out.println("direct hit");
@@ -58,19 +50,23 @@ public class Main {
                     }
                     if(hit==1)
                     {
-                        System.out.println("1 hit - "+howManyHits);
+                        oneHit=howManyHits(oneHit,twoHit,threeHit,fourHit,lotteryAutomata,numberInput);
+                        System.out.println("1 hit - "+oneHit);
                     }
                     else if(hit==2)
                     {
-                        System.out.println("2 hits - "+howManyHits);
+                        twoHit=howManyHits(oneHit,twoHit,threeHit,fourHit,lotteryAutomata,numberInput);
+                        System.out.println("2 hits - "+twoHit);
                     }
                     else if(hit==3)
                     {
-                        System.out.println("3 hits - "+howManyHits);
+                        threeHit=howManyHits(oneHit,twoHit,threeHit,fourHit,lotteryAutomata,numberInput);
+                        System.out.println("3 hits - "+threeHit);
                     }
                     else if(hit==4)
                     {
-                        System.out.println("4 hits - "+howManyHits);
+                        fourHit=howManyHits(oneHit,twoHit,threeHit,fourHit,lotteryAutomata,numberInput);
+                        System.out.println("4 hits - "+fourHit);
                     }
                 }
                 lotteryAutomata.removeAllElements();
@@ -81,7 +77,7 @@ public class Main {
     public static int getHit(LotteryAutomata lotteryAutomata,NumberInput numberInput)
     {
         int hitNumber=0;
-        List<Integer> lotteried = lotteryAutomata.getLottoNumbers();
+        Set<Integer> lotteried = lotteryAutomata.getLottoNumbers();
         List<Integer> owns = numberInput.getNumbers();
         //System.out.println(lotteried.size());
         for(int actualLotteried : lotteried)
@@ -97,39 +93,33 @@ public class Main {
         return hitNumber;
     }
 
-    public static int howManyHits(LotteryAutomata lotteryAutomata,NumberInput numberInput)
+    public static int howManyHits(int oneHit,int twoHot,int threeHit,int fourHit,LotteryAutomata lotteryAutomata,NumberInput numberInput)
     {
         int hit=getHit(lotteryAutomata,numberInput);
-        int numberOfOneHits=0;
-        int numberOfTwoHits=0;
-        int numberOfThreeHits=0;
-        int numberOfFourHits=0;
-        int numberOfFiveHits=0;
 
         if(hit==1)
         {
-            ++numberOfOneHits;
-            return numberOfOneHits;
+            ++oneHit;
+            return oneHit;
         }
         else if(hit==2)
         {
-            ++numberOfTwoHits;
-            return numberOfTwoHits;
+            ++twoHot;
+            return twoHot;
         }
         else if(hit==3)
         {
-            ++numberOfThreeHits;
-            return numberOfThreeHits;
+            ++threeHit;
+            return threeHit;
         }
         else if(hit==4)
         {
-            ++numberOfFourHits;
-            return numberOfFourHits;
+            ++fourHit;
+            return fourHit;
         }
         else if(hit==5)
         {
-            ++numberOfFiveHits;
-            return numberOfFiveHits;
+            return 1;
         }
         else
         {

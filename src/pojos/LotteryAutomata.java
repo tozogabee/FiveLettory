@@ -4,10 +4,10 @@ import java.util.*;
 
 public class LotteryAutomata {
 
-    List<Integer> lottoNumbers;
+    Set<Integer> lottoNumbers;
 
     public LotteryAutomata() {
-        this.lottoNumbers = new ArrayList<>();
+        this.lottoNumbers = new HashSet<>();
     }
 
     public void lotterying()
@@ -17,11 +17,18 @@ public class LotteryAutomata {
         int max=90;
         for(int i=1;i<=5;++i) {
             int randNum = rand.nextInt((max - min) + 1) + min;
+            for(int element : this.lottoNumbers)
+            {
+                if(randNum==element)
+                {
+                    randNum=rand.nextInt((max - min) + 1) + min;
+                }
+            }
             this.lottoNumbers.add(randNum);
         }
     }
 
-    public List<Integer> getLottoNumbers() {
+    public Set<Integer> getLottoNumbers() {
         return lottoNumbers;
     }
 
